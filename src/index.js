@@ -18,6 +18,7 @@ const socketExists = (pattern) => {
 
 export async function run() {
   const UPTERM_VERSION = core.getInput("upterm-version") ?? "v0.14.3";
+  core.info(`Using upterm version ${UPTERM_VERSION}`);
 
   try {
     if (process.platform === "win32") {
