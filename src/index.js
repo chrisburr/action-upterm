@@ -8,11 +8,11 @@ const { createActionAuth } = require("@octokit/auth-action");
 
 import { execShellCommand } from "./helpers"
 
-const UPTERM_VERSION = "v0.7.6"
-
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 export async function run() {
+  const UPTERM_VERSION = core.getInput("upterm-version") ?? "v0.14.3";
+
   try {
     if (process.platform === "win32") {
       core.info("Windows is not supported by upterm, skipping...")
