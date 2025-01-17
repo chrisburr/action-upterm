@@ -10,6 +10,12 @@ import { execShellCommand } from "./helpers"
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+const socketExists = (pattern) => {
+  const socketPath = path.join(os.homedir(), ".upterm");
+  const files = fs.readdirSync(socketPath, { withFileTypes: true });
+  return files.some(file => file.name.endsWith(pattern));
+};
+
 export async function run() {
   const UPTERM_VERSION = core.getInput("upterm-version") ?? "v0.14.3";
 
@@ -125,7 +131,11 @@ export async function run() {
     console.debug("Entering main loop")
     while (true) {
       try {
-        core.info(await execShellCommand('bash -c "upterm session current --admin-socket ~/.upterm/*.sock"'));
+        if (socketExists(".sock")) {
+          core.info(await execShellCommand('bash -c "upterm session current --admin-socket ~/.upterm/*.sock"'));
+        } else {
+          core.info("No socket files found, skipping command.");
+        }
       } catch (error) {
         core.info(error.message);
         break
