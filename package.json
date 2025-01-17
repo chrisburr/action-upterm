@@ -1,6 +1,6 @@
 {
   "name": "action-upterm",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "description": "Debug your GitHub Actions via SSH by using upterm/tmux to get access to the runner system itself.",
   "main": "lib/index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lhotari/action-upterm.git"
+    "url": "git+https://github.com/chrisburr/action-upterm.git"
   },
   "keywords": [
     "actions",
